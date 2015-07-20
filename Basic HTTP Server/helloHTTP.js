@@ -1,8 +1,13 @@
-//handles basic HTTP (port 8080) requests to localhost
+var body = 'Hello World!\n';
 
 var http = require('http');
-http.createServer(function (req,res) {
-  res.writeHead (200, {'Content-Type': 'text/plain'});
-  res.end('Hello World!\n');
-}).listen(8080, 'localhost');
-console.log('Server running at http://localhost:8080/');
+var server = http.createServer(function (request, response) {
+	response.writeHead(200, {
+		'Content-Length': body.length, 
+		'Content-Type': 'text/plain'});
+	response.write(body);
+	response.end();
+});
+server.listen(8080,'localhost');
+
+console.log("The server is up and running at http://localhost:8080");
