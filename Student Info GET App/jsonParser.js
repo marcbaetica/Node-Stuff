@@ -15,7 +15,20 @@ var username = "joshtimonen";
 var http = require('http');
 
 //also defined a callback function which takes argument response and print out part of the object (console.dir(response) = prints the whole response object on the screen)
-var data = http.get("http://teamtreehouse.com/"+username+".json", function(response){console.log(response.statusCode);});
+var data = http.get("http://teamtreehouse.com/"+username+".json", function(response){
+	console.log(response.statusCode);
+	var body = "BODY: "; //response will be stored as a string
+	
+	response.on("data", function(chunk) {
+		body += chunk; 
+		//cant do console.log(BODY: chunk) because node runs the thread as non-blocking. therefore the word BODY: would appear multiple times in the output (every time a new network packet is processed and printed on the screen)
+	});
+
+	//return whole JSON object at the end
+	response.on("end", function(){
+		console.log(body);
+	});
+});
 
 //handeling an error on the data retreival
 data.on("error", function (error){console.log(error.message)}); //all errors have the message property
