@@ -15,5 +15,7 @@ var username = "joshtimonen";
 var http = require('http');
 
 //also defined a callback function which takes argument response and print out part of the object (console.dir(response) = prints the whole response object on the screen)
-var request = http.get("http://teamtreehouse.com/"+username+".json", function(response){console.log(response.statusCode);});
+var data = http.get("http://teamtreehouse.com/"+username+".json", function(response){console.log(response.statusCode);});
 
+//handeling an error on the data retreival
+data.on("error", function (error){console.log(error.message)}); //all errors have the message property
