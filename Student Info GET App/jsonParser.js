@@ -16,8 +16,8 @@ var http = require('http');
 
 //also defined a callback function which takes argument response and print out part of the object (console.dir(response) = prints the whole response object on the screen)
 var data = http.get("http://teamtreehouse.com/"+username+".json", function(response){
-	console.log(response.statusCode);
-	var body = "BODY: "; //response will be stored as a string
+	console.log("Server response was "+response.statusCode+".");
+	var body = ""; //response will be stored as a string
 	
 	response.on("data", function(chunk) {
 		body += chunk; 
@@ -26,9 +26,15 @@ var data = http.get("http://teamtreehouse.com/"+username+".json", function(respo
 
 	//return whole JSON object at the end
 	response.on("end", function(){
-		console.log(body);
+		//console.log(body);
+		//parsing = converting a string into a data structure
+		//JSON is a native object to JavaScript
+		var profileJSON = JSON.parse(body);
+		//console.dir(profileJSON);
+		printMessage(username, profileJSON.badges.length, profileJSON.points.JavaScript); //badges is an array so we apply the length method on it
 	});
 });
+
 
 //handeling an error on the data retreival
 data.on("error", function (error){console.log(error.message)}); //all errors have the message property
