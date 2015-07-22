@@ -8,8 +8,18 @@ function printMessage (username, badgeCount, points) {
 
 }
 
+//to handle the three types of error:
+//connection error
+//JSON not properly parsed 
+//status code is not 200
+function printError (error) {
+	console.log(error.message);
+}
+
+
+
 //connecting to URL through node HTTP API
-var username = "joshtimonen";
+var username = "joshtimonen"; //change to see error
 
 //adding the http api into the file
 var http = require('http');
@@ -26,15 +36,23 @@ var data = http.get("http://teamtreehouse.com/"+username+".json", function(respo
 
 	//return whole JSON object at the end
 	response.on("end", function(){
-		//console.log(body);
-		//parsing = converting a string into a data structure
-		//JSON is a native object to JavaScript
-		var profileJSON = JSON.parse(body);
-		//console.dir(profileJSON);
-		printMessage(username, profileJSON.badges.length, profileJSON.points.JavaScript); //badges is an array so we apply the length method on it
+		if (response.statusCode == 200) {
+			//console.log(body);
+			//parsing = converting a string into a data structure
+			//JSON is a native object to JavaScript
+			try {
+				var profileJSON = JSON.parse(body);
+				//console.dir(profileJSON);
+				printMessage(username, profileJSON.badges.length, profileJSON.points.JavaScript); //badges is an array so we apply the length method on it
+			} catch (e) {
+				printError (e);
+			}
+		} else {
+			printError({message: "There was an error getting profile for "+username+"."});
+		}
 	});
 });
 
 
 //handeling an error on the data retreival
-data.on("error", function (error){console.log(error.message)}); //all errors have the message property
+data.on("error", printError); //all errors have the message property
