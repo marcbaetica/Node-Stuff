@@ -17,12 +17,12 @@ function printError (error) {
 }
 
 
-
 //connecting to URL through node HTTP API
-var username = "joshtimonen"; //change to see error
 
 //adding the http api into the file
 var http = require('http');
+
+function getProfile (username) {
 
 //also defined a callback function which takes argument response and print out part of the object (console.dir(response) = prints the whole response object on the screen)
 var data = http.get("http://teamtreehouse.com/"+username+".json", function(response){
@@ -56,3 +56,10 @@ var data = http.get("http://teamtreehouse.com/"+username+".json", function(respo
 
 //handeling an error on the data retreival
 data.on("error", printError); //all errors have the message property
+
+}
+
+
+
+//so the get method is exposed for other files
+module.exports.get = getProfile; //for this module(profile) we want to export a function called get and in this file it is called getProfile
