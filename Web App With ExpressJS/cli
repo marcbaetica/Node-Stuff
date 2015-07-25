@@ -1,3 +1,6 @@
+$ npm install -g express-generator
+g for global install
+
 $ express exp2015 --hogan -c less
 hoogan for hogan templating (which is esentially moustache)
 c for CSS
