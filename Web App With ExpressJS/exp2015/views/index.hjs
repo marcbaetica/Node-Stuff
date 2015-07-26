@@ -5,7 +5,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>{{ title }}</h1>
+    <h1>{{ title }}</h1> <!--hogan templating-->
     <p>Welcome to {{ title }}</p>
+    <p>I am {{ age }} years old!<p>
+
   </body>
 </html>

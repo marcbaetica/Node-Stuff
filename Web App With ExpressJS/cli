@@ -9,3 +9,13 @@ less for less (can also choose stylus but NOT SAAS)
 $ cd exp2015
 
 $ npm install (for dependencies... will also install express and everything required from your package.json file)
+
+$ DEBUG=exp2015:* npm start
+exp2015 from bin/www line 8
+
+$ npm install -g nodemon
+nodemon keeps track of changes in files and automatically restarts the server for us on every file save
+
+$ nodemon bin/www
+runs server with nodemon
+

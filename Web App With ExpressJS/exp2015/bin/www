@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+
+//load debugger and app so we are good to go
 var app = require('../app');
 var debug = require('debug')('exp2015:server');
 var http = require('http');
