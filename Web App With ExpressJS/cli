@@ -18,4 +18,3 @@ nodemon keeps track of changes in files and automatically restarts the server fo
 
 $ nodemon bin/www
 runs server with nodemon
-
