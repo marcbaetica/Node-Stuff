@@ -1,0 +1,2 @@
+$ sudo npm install -S mongoose
+//s because we want to add it to our modules subdirectory
