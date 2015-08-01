@@ -25,3 +25,9 @@ Web App With ExpressJS: (run as node helloHTTP.js in CLI)
 
 MongoDB Connection Mongoose+Node+Express: (in progress)
 -node app that connects to MongoDB via Mongoose
+
+
+ZipCode Weather Forecast: (in progress)
+-gets today's forecast based on the ZipCode
+-usage: node forecast.io 9020
+-to use: Forecast.io (has an API that can be used to get today's forecast)
