@@ -5,6 +5,10 @@ Http Server: (run as node helloHTTP.js in CLI)
 -returns "Hello World!" on http://localhost:8080
 
 
+Express HTTP Server:
+-uses the express framework on node and returns "Hello World!" on http://localhost:8080
+
+
 Student Info Get App: (run as node app.js in CLI)
 -retrieves profile information from the teamtreehouse API
 -parses the JSON data
@@ -13,3 +17,17 @@ Student Info Get App: (run as node app.js in CLI)
 -implements event handlers for streams
 -organized code in multiple modules
 -can take multiple usernames
+
+
+Web App With ExpressJS: (run as node helloHTTP.js in CLI)
+-used express builder and modified to returns standard page using one available route on http://localhost:3000
+
+
+MongoDB Connection Mongoose+Node+Express: (in progress)
+-node app that connects to MongoDB via Mongoose
+
+
+ZipCode Weather Forecast: (in progress)
+-gets today's forecast based on the ZipCode
+-usage: node forecast.io 9020
+-to use: Forecast.io (has an API that can be used to get today's forecast)
