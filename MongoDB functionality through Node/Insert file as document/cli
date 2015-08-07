@@ -1,0 +1,7 @@
+extract json file and store as primer-dataset.json
+$ wget "https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/dataset.json"
+$ mv dataset.json primer-dataset.json
+
+
+//add primer-dataset.json into collection test.restaurants but drop it if it already exists
+$ mongoimport --db test --collection restaurants --drop --file primer-dataset.json
