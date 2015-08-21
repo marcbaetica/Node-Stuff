@@ -1,8 +1,0 @@
-{
-	"name": "mongoose-app",
-	"main": "serverDB-connect.js",
-	"dependencies": {
-		"express": "~4.13.3",
-		"mongoose": "~4.1.3"
-	}
-}
