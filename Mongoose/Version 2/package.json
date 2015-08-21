@@ -1,0 +1,7 @@
+{
+	"name": "mongoose-app-2",
+	"main": "server.js",
+	"dependencies": {
+		"mongoose": "latest"
+	}
+}
