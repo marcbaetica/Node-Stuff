@@ -1,33 +1,20 @@
-//connecting to server
+//dependencies
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', function (err) {
+var isJSON = require('is-json');
+
+//requesting a build of our model
+var restaurantModel = require('./app/models/model');
+
+
+//use the model to find a document and print it on the screen
+restaurantModel.findOne().lean().exec(function(err, doc) {
 	if (err) throw err;
-	console.log('Connected!');
-});
-
-
-
-var ourSchema = new mongoose.Schema({
-	address: {
-		building: String,
-		coord: [],
-		street: String,
-		zipcode: String
-	},
-	borough: String,
-	cuisine: String,
-	grades: [{ score: Number,
-		grade: String,
-		date: Date }],
-	name: String,
-	restaurant_id: String
-});
-
-//create model
-var model = mongoose.model('restaurants', ourSchema); //looks for the restaurants collection automatically
-
-
-model.findOne({}).lean().exec(function (err, doc) {
-	if (err) throw err;
+	//converted document to JSON if not already before printing
+	console.log("Original MongoDB document is json: " + isJSON(doc));
+	if(!isJSON(doc)){
+		doc = JSON.stringify(doc);
+		console.log("Document was converted to JSON format: " + isJSON(doc) + "\n");
+	}
+	console.log("The returned document in JSON format is:\n");
 	console.log(doc);
-}); 
+});

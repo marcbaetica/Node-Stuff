@@ -18,4 +18,7 @@ Version 2: Node + Mongoose
 
 This application simply connects to the MongoDB "test" database, sends a POST request for a restaurant called "We-Feedin'-You" and after successful completion it queries the database to to print the document for the "We-Feedin'-You" restaurant in the CLI.
 
-to run -> $node server.js
+To run database connection through port 27017 (standard for MongoDB):
+-> $node server.js
+OR to set desired process.env.PORT variable by replacing #### with a number:
+-> $PORT=#### node server.js
