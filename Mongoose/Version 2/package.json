@@ -4,5 +4,8 @@
 	"dependencies": {
 		"mongoose": "latest",
 		"is-json": "latest"
+	},
+	"scripts": {
+		"postinstall": "node postDoc.js"
 	}
 }
