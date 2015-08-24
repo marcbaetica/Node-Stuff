@@ -1,0 +1,8 @@
+{
+  "name": "express-sendfile",
+  "main": "server.js",
+  "dependencies": {
+    "angular": "^1.4.4",
+    "express": "^4.13.3"
+  }
+}

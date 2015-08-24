@@ -59,7 +59,7 @@ OR to set desired process.env.PORT variable by replacing #### with a number:
 
 
 
-Version 2: Node + Mongoose
+Version 2: Node + Mongoose (note to self: need to fix mongoose error on write)
 
 This application simply connects to the MongoDB "test" database, sends a POST request for a restaurant called "We-Feedin'-You" and after successful completion it queries the database to to print the document for the "We-Feedin'-You" restaurant in the CLI. This app also uses the 'is-json' npm package to check if the document is in JSON format. If not, conversion is done prior to returning it to the user.
 
@@ -68,6 +68,17 @@ Instructions: make sure run.sh script is executable (chmod 700) and then run it 
 1 - run '$npm install' so the postinstall POST script is called up from package.json and the document is written in the database
 
 2 - for READ from database -> runs database connection through port 27017 (standard for MongoDB setups) by executing: '$node server.js'. Alternatively you can modify the script to set the desired process.env.PORT variable by replacing #### with a number: '$PORT=#### node server.js'
+
+
+====================================================================
+
+
+Express Send File:
+
+Uses the express framework to send a webpage running with AngularJS.
+
+To run -> '$node server.js'
+OR '$PORT=#### node server.js' for a custom http port
 
 
 ====================================================================
