@@ -59,7 +59,7 @@ OR to set desired process.env.PORT variable by replacing #### with a number:
 
 
 
-Version 2: Node + Mongoose (note to self: need to fix mongoose error on write)
+Version 2: Node + Mongoose
 
 This application simply connects to the MongoDB "test" database, sends a POST request for a restaurant called "We-Feedin'-You" and after successful completion it queries the database to to print the document for the "We-Feedin'-You" restaurant in the CLI. This app also uses the 'is-json' npm package to check if the document is in JSON format. If not, conversion is done prior to returning it to the user.
 

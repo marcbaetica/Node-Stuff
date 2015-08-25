@@ -11,7 +11,6 @@ console.log("Port connection is: " + port);
 
 //reginstering the schema globally (can rename because not needed globally in this case)
 var Schema = new mongoose.Schema({
-	_id: mongoose.Schema.Types.ObjectId,
 	address: {
 		building: String,
 		coord: [],

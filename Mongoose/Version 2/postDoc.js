@@ -2,12 +2,11 @@
 
 //dependencies
 var mongoose = require('mongoose');
-var ourModel = require('./app/models/model.js');
+var ourModel = require('./app/models/model');
 var isJSON = require('is-json');
 
 //creating a document
-var jsonData = JSON.stringify({
-	_id: mongoose.Schema.Types.ObjectId("21354321234324"),
+var jsonData = ourModel({
 	address: {
 		building: "6909",
 		coord: [ -74.0259567, 40.6353674 ],
@@ -22,7 +21,7 @@ var jsonData = JSON.stringify({
 });
 
 
-var toPost = new ourModel(jsonData, function() {console.log("\nThe document has been created!\n")});  // ERROR: gets blocked here ... need to find fix for:
+//var toPost = new ourModel(jsonData, function() {console.log("\nThe document has been created!\n")});  // ERROR: gets blocked here ... need to find fix for:
 /*
 if (obj && '_id' in obj) continue;
                           ^
@@ -31,7 +30,7 @@ TypeError: Cannot use 'in' operator to search for '_id' in {callback = function(
 
 
 //saving the document
-toPost.save(function(err){
+jsonData.save(function(err){
 	if (err) throw err; //or process.exit(1);
 	console.log("New restaurant 'We-Feedin'-You' info has been posted to our database!\n\n");
 });
