@@ -84,6 +84,18 @@ OR '$PORT=#### node server.js' for a custom http port
 ====================================================================
 
 
+Router Use:
+
+Different use case implementations for the Express 4.x.x router.
+
+This server app has two routers: one to provide basic routing to desired URLs and one for exposure of an internal login API (via GET and POST methods).
+
+Next steps: separating the two routers into modules
+
+
+====================================================================
+
+
 MongoDB Connection Mongoose+Node+Express: (work in progress)
 -node app that connects to MongoDB via Mongoose
 
