@@ -120,6 +120,17 @@ Port: 27017 (standard set in /etc/mongod.conf)
 ====================================================================
 
 
+Body Parser:
+
+This is a working implementation of extracting parsed information from the body of a url-encoded POST message which is sent back by the server within its response.
+Parsed parameters in use: 'id' and 'token'
+Parameters type: both of them were tested as type 'Text'
+Start with '$node server.js' or '$PORT=#### node server.js' if you wish to use a port of your choosing.
+
+
+====================================================================
+
+
 ZipCode Weather Forecast: (work in progress)
 -gets today's forecast based on the ZipCode
 -usage: node forecast.io 9020
