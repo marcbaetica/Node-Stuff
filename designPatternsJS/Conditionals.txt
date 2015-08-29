@@ -1,0 +1,167 @@
+Discussions usually begin surrounding complex if statements such as this:
+
+if (value == 0){
+    return result0;
+} else if (value == 1){
+    return result1;
+} else if (value == 2){
+    return result2;
+} else if (value == 3){
+    return result3;
+} else if (value == 4){
+    return result4;
+} else if (value == 5){
+    return result5;
+} else if (value == 6){
+    return result6;
+} else if (value == 7){
+    return result7;
+} else if (value == 8){
+    return result8;
+} else if (value == 9){
+    return result9;
+} else {
+    return result10;
+}
+Typically, this type of construct is frowned upon. The major problem is that the deeper into the statement the execution flows, the more conditions have to be evaluated. It will take longer to complete the execution when value is 9 than if value is 0 because every other condition must be evaluated beforehand. As the overall number of conditions increases, so does the performance hit for going deep into the conditions. While having a large number of if conditions isn’t advisable, there are steps you can take to increase the overall performance.
+
+The first step is to arrange the conditions in decreasing order of frequency. Since exiting after the first condition is the fastest operation, you want to make sure that happens as often as possible. Suppose the most common case in the previous example is that value will equal 5 and the second most common is that value will equal 9. In that case, you know five conditions will be evaluated before getting to the most common case and nine before getting to the second most common case; this is incredibly inefficient. Even though the increasing numeric order of the conditions makes it easier to read, it should actually be rewritten as follows:
+
+if (value == 5){
+
+    return result5;
+} else if (value == 9){
+    return result9;
+} else if (value == 0){
+    return result0;
+} else if (value == 1){
+    return result1;
+} else if (value == 2){
+    return result2;
+} else if (value == 3){
+    return result3;
+} else if (value == 4){
+    return result4;
+} else if (value == 6){
+    return result6;
+} else if (value == 7){
+    return result7;
+} else if (value == 8){
+    return result8;
+} else {
+    return result10;
+}
+Now the two most common conditions appear at the top of the if statement, ensuring optimal performance for these cases.
+
+Another way to optimize if statements is to organize the conditions into a series of branches, following a binary search algorithm to find the valid condition. This is advisable in the case where a large number of conditions are possible and no one or two will occur with a high enough rate to simply order according to frequency. The goal is to minimize the number of conditions to be evaluated for as many of the conditions as possible. If all of the conditions for value in the example will occur with the same relative frequency, the if statements can be rewritten as follows:
+
+if (value < 6){
+
+    if (value < 3){
+        if (value == 0){
+            return result0;
+        } else if (value == 1){
+            return result1;
+        } else {
+            return result2;
+        }
+    } else {
+        if (value == 3){
+            return result3;
+        } else if (value == 4){
+            return result4;
+        } else {
+            return result5;
+        }
+    }
+
+} else {
+
+    if (value < 8){
+        if (value == 6){
+            return result6;
+        } else {
+            return result7;
+        }
+    } else {
+        if (value == 8){
+            return result8;
+        } else if (value == 9){
+            return result9;
+        } else {
+            return result10;
+        }
+
+    }
+}
+This code ensures that there will never be any more than four conditions evaluated. Instead of evaluating each condition to find the right value, the conditions are separated first into a series of ranges before identifying the actual value. The overall performance of this example is improved because the cases where eight and nine conditions need to be evaluated have been removed. The maximum number of condition evaluations is now four, creating an average savings of about 30% off the execution time of the previous version. Keep in mind, also, that an else statement has no condition to evaluate. However, the problem remains that each additional condition ends up taking more time to execute, affecting not only the performance but also the maintainability of this code. This is where the switch statement comes in.
+The switch statement
+
+The switch statement simplifies both the appearance and the performance of multiple conditions. You can rewrite the previous example using a switch statement as follows:
+
+switch(value){
+    case 0:
+        return result0;
+    case 1:
+        return result1;
+    case 2:
+        return result2;
+    case 3:
+        return result3;
+    case 4:
+        return result4;
+    case 5:
+        return result5;
+    case 6:
+        return result6;
+    case 7:
+        return result7;
+    case 8:
+        return result8;
+    case 9:
+        return result9;
+    default:
+        return result10;
+}
+This code clearly indicates the conditions as well as the return values in an arguably more readable form. The switch statement has the added benefit of allowing fall-through conditions, which allow you to specify the same result for a number of different values without creating complex nested conditions. The switch statement is often cited in other programming languages as the hands-down better option for evaluating multiple conditions. This isn’t because of the nature of the switch statement, but rather because of how compilers are able to optimize switch statements for faster evaluation. Since most JavaScript engines don’t have such optimizations, performance of the switch statement is mixed.
+
+Firefox handles switch statements very well, with each condition’s evaluation executing in roughly the same amount of time regardless of the order in which they are defined. That means the case of value equal to 0 will take roughly the same amount of time to execute as when value is 9. Other browsers, however, aren’t nearly as good. Internet Explorer, Opera, Safari, and Chrome all show noticeable increases in the execution time as you get deeper into the switch statement. Those increases, however, are smaller than the increases experienced with each additional condition of an if statement. You can therefore improve the performance of switch statements by ordering the conditions in decreasing rate of frequency (the same as if statement optimization).
+
+In JavaScript, if statements are generally faster than switch statements when there are just one or two conditions to be evaluated. When there are more than two conditions, and the conditions are simple (not ranges), the switch statement tends to be faster. This is because the amount of time it takes to execute a single condition in a switch statement is often less than it takes to execute a single condition in an if statement, making the switch statement optimal only when there are a larger number of conditions.
+
+Another option: Array lookup
+
+There are more than two solutions for dealing with conditionals in JavaScript. Alongside the if statement and the switch statement is a third approach: looking up values in arrays. The example for this section maps a given number to a specific result, which is exactly what arrays are for. Instead of writing a large if statement or switch statement, you can use the following code:
+
+//define the array of results
+var results = [result0, result1, result2, result3, result4, result5, result6,
+result7,
+               result8, result9, result10]
+
+//return the correct result
+return results[value];
+Instead of using conditional statements, all of the results are stored in an array whose index maps to the value variable. Retrieving the appropriate result is simply a matter of array value lookup. Although array lookup times also increase the deeper into the array you go, the incremental increase is so small that it is irrelevant relative to the increases in each condition evaluation for if and switch statements. This makes array lookup ideal whenever there are a large number of conditions to be met, and the conditions can be represented by discrete values such as numbers or strings (for strings, you can use an Object to store the results rather than an Array).
+
+It’s not practical to use array lookup for small numbers of results because array lookup is often slower than evaluating a small number of conditions. Array lookups can be very helpful when there are a large number of ranges because they eliminate the need to test both upper and lower bounds; you can simply fill in that range of indexes in the array with the appropriate value and do a straight array lookup.
+
+The fastest conditionals
+
+The three techniques presented here—the if statement, the switch statement, and array lookup—each have their uses in optimizing code execution:
+
+Use the if statement when:
+
+There are no more than two discrete values for which to test.
+
+There are a large number of values that can be easily separated into ranges.
+
+Use the switch statement when:
+
+There are more than two but fewer than 10 discrete values for which to test.
+
+There are no ranges for conditions because the values are nonlinear.
+
+Use array lookup when:
+
+There are more than 10 values for which to test.
+
+The results of the conditions are single values rather than a number of actions to be taken.
