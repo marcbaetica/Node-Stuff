@@ -143,3 +143,24 @@ ZipCode Weather Forecast: (work in progress)
 designPatterns:
 
 This is just a set of references for personal use.
+
+
+====================================================================
+
+Sublime Setup:
+
+- Go to:
+Tools -> Build System -> New Build System
+
+- Insert:
+{
+    "cmd": ["node", "$file", "$file_base_name"],
+    "working_dir": "${project_path:${folder}}",
+    "selector": "*.js"
+}
+
+- Save as Node.sublime-build
+
+- Switch to Tools -> Build System -> Node
+
+- To compile and run script type Crtl+b
